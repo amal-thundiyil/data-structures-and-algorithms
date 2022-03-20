@@ -6,7 +6,8 @@
             "import java.io.*;",
             
             "public class Main {",
-                "$LINE_COMMENT For fast input output",
+                "static FastReader fs;",
+                "static PrintWriter pw;",
                 "static class FastReader {",
                     "BufferedReader br;",
                     "StringTokenizer st;",
@@ -45,11 +46,8 @@
                         "return str;",
                     "}",
                 "}",
-                "$LINE_COMMENT end of fast i/o code",
-            
                 
                 "public static void main(String[] args) {",
-                    "FastReader reader = new FastReader();",
                     "$0",
             "}",
         "}"

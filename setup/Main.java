@@ -2,11 +2,30 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    static FastReader fs;
+    static PrintWriter pw;
+
+    public static void solve() {
+
+    }
+
+    public static void main(String args[]) throws Exception {
+        System.setErr(new PrintStream("error.txt"));
+        fs = new Reader();
+        pw = new PrintWriter(System.out);
+        int t = 1;
+        t = fs.nextInt();
+        while (t-- > 0) {
+            solve();
+        }
+        pw.close();
+    }
+
     static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 
-        public FastReader() {
+        public fastReader() {
             try {
                 br = new BufferedReader(
                         new FileReader("input.txt"));
@@ -51,8 +70,4 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
-        FastReader reader = new FastReader();
-
-    }
 }
