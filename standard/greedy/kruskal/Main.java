@@ -4,34 +4,23 @@ import java.io.*;
 public class Main {
     static FastReader fs;
     static PrintWriter pw;
+    static HashSet<Edge>[] graph;
 
-    public void knapsack(int wt[], int c[], int W, int n) {
-        int ans[][] = new int[n + 1][W + 1];
-        int i = 0, w = 0;
-        for (i = 0; i <= n; i++) {
-            for (w = 0; w <= W; w++) {
-                if (i == 0 || w == 0) {
-                    ans[i][w] = 0;
-                } else if (wt[i - 1] <= W) {
-                    ans[i][w] = Math.max(c[i - 1] + ans[i - 1][w - wt[i - 1]], ans[i - 1][w]);
-                } else {
-                    ans[i][w] = ans[i - 1][w];
-                }
-            }
+    static class Edge {
+        int from, to, weight;
+
+        Edge(int from, int to, int weight) {
+            this.from = from;
+            this.to = to;
+            this.weight = weight;
         }
+    }
 
-        int res = ans[n][W];
-        System.out.println(res);
+    public void addEdge(int from, int to, int weight) {
+        graph[from].add(from, to, weight);
+    }
 
-        for (w = W, i = n; i > 0 && res > 0; i--) {
-            if (res == ans[i - 1][w])
-                continue;
-            else {
-                System.out.print(wt[i - 1] + " ");
-                res = res - c[i - 1];
-                w = w - wt[i - 1];
-            }
-        }
+    public void kruskal() {
     }
 
     public static void solve() {
@@ -39,7 +28,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
         System.setErr(new PrintStream("error.txt"));
-        fs = new FastReader();
+        fs = new Reader();
         pw = new PrintWriter(System.out);
         int t = 1;
         t = fs.nextInt();
@@ -53,7 +42,7 @@ public class Main {
         BufferedReader br;
         StringTokenizer st;
 
-        public FastReader() {
+        public fastReader() {
             try {
                 br = new BufferedReader(
                         new FileReader("input.txt"));
