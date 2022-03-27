@@ -1,7 +1,7 @@
 import java.util.*;
 import java.lang.Math;
 
-public class Main {
+public class AssemblyLine {
     static void solve(Scanner in) {
         int n = in.nextInt();
         int cost_a[] = new int[n + 1];
