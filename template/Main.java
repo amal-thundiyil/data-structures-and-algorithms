@@ -1,34 +1,93 @@
+package template;
+
+import java.util.*;
+import java.io.*;
+
 import java.util.*;
 import java.io.*;
 
 public class Main {
     static FastReader fs;
     static PrintWriter pw;
-    static HashSet<Edge>[] graph;
 
-    static class Edge {
-        int from, to, weight;
+    public void solve() {
+    }
 
-        Edge(int from, int to, int weight) {
-            this.from = from;
-            this.to = to;
-            this.weight = weight;
+    public void main(String[] args) throws Exception {
+        System.setErr(new PrintStream("error.txt"));
+        System.setIn(new FileInputStream("input.txt"));
+        fs = new FastReader();
+        pw = new PrintWriter(System.out);
+        int t = 1;
+        t = fs.nextInt();
+        while (t-- > 0) {
+            solve();
+        }
+        pw.close();
+    }
+}
+
+class FastReader {
+    BufferedReader br;
+    StringTokenizer st;
+
+    public FastReader() {
+        try {
+            br = new BufferedReader(
+                    new FileReader("input.txt"));
+            PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+            System.setOut(out);
+        } catch (Exception e) {
+            br = new BufferedReader(new InputStreamReader(System.in));
         }
     }
 
-    public void addEdge(int from, int to, int weight) {
-        graph[from].add(from, to, weight);
+    String next() {
+        while (st == null || !st.hasMoreElements()) {
+            try {
+                st = new StringTokenizer(br.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return st.nextToken();
     }
 
-    public void kruskal() {
+    int nextInt() {
+        return Integer.parseInt(next());
     }
+
+    long nextLong() {
+        return Long.parseLong(next());
+    }
+
+    double nextDouble() {
+        return Double.parseDouble(next());
+    }
+
+    String nextLine() {
+        String str = "";
+        try {
+            str = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+}
+
+
+
+    static FastReader fs;
+    static PrintWriter pw;
 
     public static void solve() {
+
     }
 
     public static void main(String args[]) throws Exception {
         System.setErr(new PrintStream("error.txt"));
-        fs = new Reader();
+        fs = new FastReader();
         pw = new PrintWriter(System.out);
         int t = 1;
         t = fs.nextInt();
@@ -42,7 +101,7 @@ public class Main {
         BufferedReader br;
         StringTokenizer st;
 
-        public fastReader() {
+        public FastReader() {
             try {
                 br = new BufferedReader(
                         new FileReader("input.txt"));
