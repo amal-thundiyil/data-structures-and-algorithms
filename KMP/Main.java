@@ -6,29 +6,23 @@ public class Main {
     static PrintWriter pw;
 
     public static void kmp(String txt, String ptn, int[] lps) {
-        StringBuilder sb = new StringBuilder();
         List<String> res = new ArrayList<>();
         int t = 0, p = 0;
         while (t < txt.length()) {
-            if (txt.charAt(t) == ptn.charAt(p)) {
-                sb.append(txt.charAt(t));
-                t++;
+            if (ptn.charAt(p) == txt.charAt(t)) {
                 p++;
+                t++;
             }
-
-            if (sb.length() == ptn.length()) {
-                res.add(sb.toString());
-                sb.setLength(0);
+            if (p == ptn.length()) {
+                System.out.println("Found pattern "
+                        + "at index " + (t - p));
+                res.add(txt.substring(t - p, t));
                 p = lps[p - 1];
-            }
-
-            else if (t < txt.length() && txt.charAt(t) != ptn.charAt(p)) {
-                if (p == 0) {
-                    sb.setLength(0);
-                    t++;
-                } else {
+            } else if (t < txt.length() && ptn.charAt(p) != txt.charAt(t)) {
+                if (p != 0)
                     p = lps[p - 1];
-                }
+                else
+                    t = t + 1;
             }
         }
         pw.println(res.toString());
