@@ -30,7 +30,7 @@ public class Main {
     static void computeTF(char[] pat, int M, int TF[][]) {
         int state, x;
         for (state = 0; state <= M; ++state)
-            for (x = 0; x < NO_OF_CHARS; ++x)
+            for (x = 0; x < CHARS; ++x)
                 TF[state][x] = getNextState(pat, M, state, x);
     }
 
@@ -41,7 +41,7 @@ public class Main {
         int M = pat.length;
         int N = txt.length;
 
-        int[][] TF = new int[M + 1][NO_OF_CHARS];
+        int[][] TF = new int[M + 1][CHARS];
 
         computeTF(pat, M, TF);
 
