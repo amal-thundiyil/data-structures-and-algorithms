@@ -20,7 +20,7 @@ public class Main {
         pw.println("");
     }
 
-    public static void bb(int[][] mat, List<int[][]> temp, List<int[][]> ans, int i, int j, int c) {
+    public static void bb(int[][] mat, int[][] vis, List<int[][]> temp, List<int[][]> ans, int i, int j, int c) {
         if (c == 0) {
             for (int[][] a : temp) {
                 ans.add(a);
@@ -29,48 +29,55 @@ public class Main {
         }
         int c1, c2, c3, c4;
         c1 = c2 = c3 = c4 = Integer.MAX_VALUE;
-        if (i - 1 > 0 && mat[i - 1][j] != -1) {
-            int num = mat[i - 1][j];
-            mat[i - 1][j] = -1;
+        if (i - 1 > 0 && vis[i - 1][j] != 1) {
+            swap(mat, i, j, i - 1, j);
             c1 = h(mat);
-            mat[i - 1][j] = num;
+            swap(mat, i, j, i - 1, j);
         }
-        if (i + 1 > 0 && mat[i + 1][j] != -1) {
-            int num = mat[i + 1][j];
-            mat[i + 1][j] = -1;
+        if (i + 1 > 0 && vis[i + 1][j] != 1) {
+            swap(mat, i, j, i + 1, j);
             c2 = h(mat);
-            mat[i + 1][j] = num;
+            swap(mat, i, j, i + 1, j);
         }
-        if (j - 1 > 0 && mat[i][j - 1] != -1) {
-            int num = mat[i][j - 1];
-            mat[i][j - 1] = -1;
+        if (j - 1 > 0 && vis[i][j - 1] != 1) {
+            swap(mat, i, j, i, j - 1);
             c3 = h(mat);
-            mat[i][j - 1] = num;
+            swap(mat, i, j, i, j - 1);
         }
-        if (j + 1 > 0 && mat[i][j + 1] != -1) {
-            int num = mat[i][j + 1];
-            mat[i][j + 1] = -1;
+        if (j + 1 > 0 && vis[i][j + 1] != 1) {
+            swap(mat, i, j, i, j + 1);
             c4 = h(mat);
-            mat[i][j + 1] = num;
+            swap(mat, i, j, i, j + 1);
         }
+        vis[i][j] = 1;
         c = Math.min(Math.min(c1, c2), Math.min(c3, c4));
-        findMinMatrix(c, c1, c2, c3, c4, mat, i, j);
-        display(mat);
+        if (c == Integer.MAX_VALUE) {
+            return;
+        }
+        findMinMatrix(c, c1, c2, c3, c4, mat, i, j, temp);
+        bb(mat, vis, temp, ans, i, j, c);
     }
 
-    public static void swap() {
-
+    public static void swap(int[][] mat, int a1, int a2, int b1, int b2) {
+        mat[a1][a2] ^= mat[b1][b2];
+        mat[b1][b2] ^= mat[a1][a2];
+        mat[a1][a2] ^= mat[b1][b2];
     }
 
-    public static void findMinMatrix(int c, int c1, int c2, int c3, int c4, int[][] mat, int i, int j) {
+    public static void findMinMatrix(int c, int c1, int c2, int c3, int c4, int[][] mat, int i, int j,
+            List<int[][]> temp) {
         if (c1 == c) {
-            mat[i - 1][j] = -1;
+            swap(mat, i, j, i - 1, j);
+            temp.add(mat);
         } else if (c2 == c) {
-            mat[i + 1][j] = -1;
+            swap(mat, i, j, i + 1, j);
+            temp.add(mat);
         } else if (c3 == c) {
-            mat[i][j - 1] = -1;
+            swap(mat, i, j, i, j - 1);
+            temp.add(mat);
         } else if (c4 == c) {
-            mat[i][j + 1] = -1;
+            swap(mat, i, j, i, j + 1);
+            temp.add(mat);
         }
     }
 
@@ -91,6 +98,7 @@ public class Main {
         int m = fs.nextInt();
         int n = fs.nextInt();
         int mat[][] = new int[m][n];
+        int vis[][] = new int[m][n];
         List<int[][]> ans = new ArrayList<>();
         List<int[][]> temp = new ArrayList<>();
         for (int i = 0; i < m; i++) {
@@ -101,7 +109,7 @@ public class Main {
         int[] arr = new int[2];
         initalPosn(mat, arr);
         display(mat);
-        bb(mat, temp, ans, arr[0], arr[1], h(mat));
+        bb(mat, vis, temp, ans, arr[0], arr[1], h(mat));
         display(ans);
     }
 
@@ -118,7 +126,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        // System.setErr(new PrintStream("error.txt"));
+        System.setErr(new PrintStream("error.txt"));
         System.setIn(new FileInputStream("input.txt"));
         fs = new Scanner(System.in);
         pw = new PrintWriter(System.out, true);
