@@ -1,2 +1,5 @@
-1
-sfsdfsdfs sfdds d
+2
+AABAACAADAABAABA
+AABA
+THIS IS A TEST TEXT
+TEST
