@@ -43,8 +43,8 @@ public class Main {
     }
 
     public static void solve() {
-        String txt = fs.next();
-        String ptn = fs.next();
+        String txt = fs.nextLine();
+        String ptn = fs.nextLine();
         int[] lps = new int[ptn.length()];
         genLps(ptn, lps);
         kmp(txt, ptn, lps);
@@ -56,6 +56,7 @@ public class Main {
         fs = new Scanner(System.in);
         pw = new PrintWriter(System.out, true);
         int t = fs.nextInt();
+        fs.nextLine();
         while (t-- > 0) {
             solve();
         }
