@@ -2,21 +2,29 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static Scanner fs;
-    static PrintWriter pw;
-
-    public static void solve() {
+    public List<Integer> sortArray(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        if (nums == null || nums.length == 0)
+            return res;
+        insertionSort(nums);
+        for (int i : nums)
+            res.add(i);
+        return res;
     }
 
-    public static void main(String[] args) throws Exception {
-        // System.setErr(new PrintStream("error.txt"));
-        System.setIn(new FileInputStream("input.txt"));
-        fs = new Scanner(System.in);
-        pw = new PrintWriter(System.out, true);
-        int t = fs.nextInt();
-        while (t-- > 0) {
-            solve();
+    private void insertionSort(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = i; j >= 1; j--) {
+                if (nums[j] >= nums[j - 1])
+                    break;
+                swap(nums, j, j - 1);
+            }
         }
-        pw.close();
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        nums[i] = nums[i] ^ nums[j];
+        nums[j] = nums[i] ^ nums[j];
+        nums[i] = nums[i] ^ nums[j];
     }
 }

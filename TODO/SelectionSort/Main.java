@@ -1,22 +1,32 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
-    static Scanner fs;
-    static PrintWriter pw;
-
-    public static void solve() {
+class Main {
+    public List<Integer> sortArray(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        if (nums == null || nums.length == 0)
+            return res;
+        selectionSort(nums);
+        for (int i : nums)
+            res.add(i);
+        return res;
     }
 
-    public static void main(String[] args) throws Exception {
-        // System.setErr(new PrintStream("error.txt"));
-        System.setIn(new FileInputStream("input.txt"));
-        fs = new Scanner(System.in);
-        pw = new PrintWriter(System.out, true);
-        int t = fs.nextInt();
-        while (t-- > 0) {
-            solve();
+    private void selectionSort(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] < nums[minIndex])
+                    minIndex = j;
+            }
+            if (minIndex != i)
+                swap(nums, i, minIndex);
         }
-        pw.close();
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        nums[i] = nums[i] ^ nums[j];
+        nums[j] = nums[i] ^ nums[j];
+        nums[i] = nums[i] ^ nums[j];
     }
 }
