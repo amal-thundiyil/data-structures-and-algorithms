@@ -7,11 +7,11 @@ public class CelingOfNumber {
     }
 
     public static int findCeil(int[] arr, int key) {
-        return findCeilHelper(arr, key, 0, arr.length);
+        return findCeilHelper(arr, key, 0, arr.length - 1);
     }
 
     public static int findCeilHelper(int[] arr, int key, int lo, int hi) {
-        if (lo >= hi) {
+        if (lo > hi) {
             if (lo >= arr.length)
                 return -1;
             return lo;
@@ -19,7 +19,7 @@ public class CelingOfNumber {
 
         int mid = (hi + lo) / 2;
         if (arr[mid] > key)
-            return findCeilHelper(arr, key, lo, mid);
+            return findCeilHelper(arr, key, lo, mid - 1);
         if (arr[mid] < key)
             return findCeilHelper(arr, key, mid + 1, hi);
         return mid;
